@@ -10,7 +10,6 @@ export default class App extends React.Component {
 
     constructor(){
         super();
-        console.log("App Props ",this.props);
     }
 
     render(){

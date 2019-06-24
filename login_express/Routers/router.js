@@ -8,5 +8,6 @@ router.post('/logIn', controller.logIn, (req,res)=>{
 
 router.get('/', controller.getUsers);
 router.post('/signUp', controller.signUp);
+router.post('/deleteUser', controller.deleteUser);
 
 module.exports = router;

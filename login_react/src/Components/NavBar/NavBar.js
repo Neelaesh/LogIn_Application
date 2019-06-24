@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
@@ -13,12 +14,8 @@ class NavBar extends React.Component {
         }
     }
 
-    componentDidMount(){
-        console.log("History Props ",this.props)
-    }
-
     componentWillReceiveProps(nextProps){
-        console.log("NavBar Will Receive Props ",nextProps.user);
+        console.log("NavBar Will Receive Props ",nextProps);
         if(nextProps.user){
             this.setState({
                 showUser : true
@@ -26,8 +23,12 @@ class NavBar extends React.Component {
         }
     }
 
-    logOut(){
-        
+    logOut = () => {
+        this.setState({
+            showUser : false
+        }, ()=> {
+            this.props.history.push('/');
+        })
     }
 
     render(){
@@ -61,4 +62,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps)(withRouter(NavBar));

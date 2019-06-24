@@ -26,6 +26,7 @@ export function signUp(newUser, history){
 }
 
 export function userSignUp(newUser){
+    console.log("User Sign Up Action",user);
     return {
         type: 'SIGN_IN',
         newUser

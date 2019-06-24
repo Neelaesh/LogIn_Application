@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+
 import * as signUpActions from '../Actions/signUpAction';
 import SignUp from '../../Components/SignUp/SignUp';
 

@@ -1,7 +1,7 @@
-import App from '../../app';
 import { connect } from 'react-redux';
-import * as logInActions from '../Actions/logInAction';
 import { bindActionCreators } from 'redux';
+
+import * as logInActions from '../Actions/logInAction';
 import Login from '../../Components/LogIn/Login';
 
 

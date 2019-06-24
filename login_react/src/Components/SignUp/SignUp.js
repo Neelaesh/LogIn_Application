@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -22,6 +21,14 @@ class SignUp extends React.Component {
             showModal : false,
             modalMessage : null
         }
+    }
+
+    componentDidMount(){
+        console.log("SignUp Props ",this.props);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("Sign Up Will Recieve Props ",nextProps);
     }
 
     goBack = () => {
@@ -142,7 +149,7 @@ class SignUp extends React.Component {
         event.preventDefault();
         console.log("SignUp ",this.state.fields);
         if(this.handleValidation()){
-
+            
         }
         else{
             alert("Form has Errors");
@@ -228,7 +235,3 @@ class SignUp extends React.Component {
 }
 
 export default withRouter(SignUp);
-
-const mapDispatchToProps = (dispatch) => {
-    signUp : () => dispatch(signUp(user))
-}

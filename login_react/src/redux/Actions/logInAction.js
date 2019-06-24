@@ -26,7 +26,7 @@ export function logIn(user, history){
 }
 
 export function userLogIn(user){
-    console.log("User ",user);
+    console.log("User Login Action",user);
     return {
         type : types.LOG_IN,
         user
