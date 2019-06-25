@@ -9,8 +9,25 @@ import Button from 'react-bootstrap/Button';
 
 class Error extends React.Component {
 
+    constructor(){
+        super();
+        this.state = {
+            message : 'Navigate To Login Page'
+        }
+    }
+
     componentDidMount(){
         console.log("Error ",this.props.location.state);
+        if(this.props.location.state){
+            this.setState({
+                message : this.props.location.state.message
+            });
+        }
+        else{
+            this.setState({
+                message : 'Navigate To Login Page to Login Again'
+            });
+        }
     }
 
     navigateToLogInPage = () => {
@@ -22,7 +39,7 @@ class Error extends React.Component {
                 <div>
                     <center>
                         <h2>Error</h2>
-                        <h3>{this.props.location.state.message}</h3>
+                        <h3>{this.state.message}</h3>
                         <br/><br/>
                         <Container>
                         <Row>

@@ -12,21 +12,24 @@ export function signUp(newUser, history){
     return (dispatch, getState) => {
         axios.post(endPoint.signUpEndPoint, newUser).then((userDetails)=>{
             console.log("SignUp Success ",userDetails);
-            console.log("SignUp Get State ",getState);
-            dispatch(userSignUp(userDetails));
-            history.push('/home');
+            console.log("SignUp Get State ",getState());
+            dispatch(userSignUp(userDetails.data));
+            // history.push({
+            //     pathname : '/',
+            //     state : { message : userDetails.data.message, status : userDetails.data.status }
+            // });
         }).catch((error)=>{
-            console.log("Error Message ",error.response.data.message);
-            history.push({
-                pathname: '/error',
-                state : { message : error.response.data.message, status : error.response.data.status}
-            })
+            console.log("Error Message ",error);
+            // history.push({
+            //     pathname: '/error',
+            //     state : { message : error.response.data.message, status : error.response.data.status }
+            // })
         })
     }
 }
 
 export function userSignUp(newUser){
-    console.log("User Sign Up Action",user);
+    console.log("User Sign Up Action",newUser);
     return {
         type: 'SIGN_IN',
         newUser

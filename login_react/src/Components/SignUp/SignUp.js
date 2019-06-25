@@ -149,7 +149,7 @@ class SignUp extends React.Component {
         event.preventDefault();
         console.log("SignUp ",this.state.fields);
         if(this.handleValidation()){
-            
+            this.props.signUp(this.state.fields, this.props.history);
         }
         else{
             alert("Form has Errors");

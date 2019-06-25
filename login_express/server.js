@@ -18,28 +18,6 @@ app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/dist'));
 
-app.use(function(req,res,next){
-    try{
-    const token = req.headers.authorization.split(" ")[1]
-    jwt.verify(token, key.tokenKey, function (err, payload) {
-        console.log(payload)
-        if (payload) {
-            user.findById(payload.userId).then(
-                (doc)=>{
-                    req.user=doc;
-                    next()
-                }
-            )
-        } else {
-           next()
-        }
-    })
-}catch(e){
-    console.log("Inside Middleware ",e);
-    next()
-}
-})
-
 app.use('/users',router);
 
 // Catch all other routes and return the index file

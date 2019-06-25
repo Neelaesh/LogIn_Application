@@ -13,15 +13,23 @@ module.exports.logIn = (req,res,next) => {
             console.log("Password Matching ",bcrypt.compareSync(req.body.password, user[0].password));
             if(bcrypt.compareSync(req.body.password, user[0].password)){
                 let token = jwt.sign({username: user[0].username}, key.tokenKey);
-                res.status(200).json({
-                    email : user[0].email,
-                    username : user[0].username,
-                    userid : user[0].userid,
-                    firstname : user[0].firstname,
-                    lastname : user[0].lastname,
-                    token
-                });
-                next();
+                let searchEmail = { 'email' : req.body.email };
+                User.findOneAndUpdate(searchEmail, { 'token': token }, (err, data) => {
+                    if(err)
+                        res.status(400).send({ message: err, status : 400 });
+                    else{
+                        console.log("User Updated Successfully ",data);
+                        res.status(200).json({
+                            email : user[0].email,
+                            username : user[0].username,
+                            userid : user[0].userid,
+                            firstname : user[0].firstname,
+                            lastname : user[0].lastname,
+                            token
+                        });
+                        next();
+                    }
+                }); 
             }
             else{
                 console.log("Invalid Password");
@@ -31,6 +39,28 @@ module.exports.logIn = (req,res,next) => {
         else{
             res.status(400).send({ message:"Email Address Not Registered", status : 400 });
         }
+    }).catch((err)=>{
+        console.log("Error ",err);
+        res.status(400).send({ message: err, status : 400 });
+    });
+}
+
+module.exports.logOut = (req,res) => {
+    
+    console.log("Log Out ",req.body);
+    User.find({ 'email' : req.body.email, 'status': 'active' }).then((userDetails) => {
+        let logOutUser = {
+            token : ''
+        }
+        User.update({ 'email' : req.body.email }, logOutUser, function(err, data) {
+            if(err) {
+                res.status(400).send({ message : err, status : 400 });
+            }
+            else{
+                console.log("User Logged Out ",data);
+                res.status(200).send({ message: 'User Logged Out', status : 200 });
+            }
+        });
     }).catch((err)=>{
         console.log("Error ",err);
         res.status(400).send({ message: err, status : 400 });

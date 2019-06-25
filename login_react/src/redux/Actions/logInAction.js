@@ -13,6 +13,7 @@ export function logIn(user, history){
         axios.post(endPoint.logInEndPoint, user).then((userDetails)=>{
             console.log("LogIn Success ",userDetails.data);
             console.log("LogIn Get State ",getState());
+            localStorage.setItem('token', userDetails.data.token);
             dispatch(userLogIn(userDetails.data));
             history.push('/home');
         }).catch((error)=>{

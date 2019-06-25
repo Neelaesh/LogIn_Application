@@ -5,7 +5,9 @@ const initialState = {
     confirmpassword : '',
     firstname : '',
     lastname : '',
-    phonenumber : ''
+    phonenumber : '',
+    message : '',
+    status : ''
 }
 
 export default function signUp(state=initialState, action){

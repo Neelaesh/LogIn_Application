@@ -1,1 +1,1 @@
-module.exports={tokenKey:"djghhhhuuwiwuewieuwieuriwu"}
+module.exports = { tokenKey:"djghhhhuuwiwuewieuwieuriwu" }

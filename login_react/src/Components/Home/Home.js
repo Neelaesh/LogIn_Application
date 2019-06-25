@@ -7,7 +7,7 @@ class Home extends React.Component {
 
     componentDidMount(){
         console.log("Home Did Mount ",this.props.user);
-        localStorage.setItem('token', this.props.user.token);
+        // localStorage.setItem('token', this.props.user.token);
     }
 
     render(){

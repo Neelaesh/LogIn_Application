@@ -3,6 +3,6 @@ import signUp from '../Reducers/signUpReducer';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
-    logIn: logIn, 
-    signUp : signUp
+    logIn, 
+    signUp
 });
