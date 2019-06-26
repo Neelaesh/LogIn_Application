@@ -45,22 +45,11 @@ module.exports.logIn = (req,res,next) => {
     });
 }
 
-module.exports.logOut = (req,res) => {
+module.exports.logOut = (req,res,next) => {
     
     console.log("Log Out ",req.body);
     User.find({ 'email' : req.body.email, 'status': 'active' }).then((userDetails) => {
-        let logOutUser = {
-            token : ''
-        }
-        User.update({ 'email' : req.body.email }, logOutUser, function(err, data) {
-            if(err) {
-                res.status(400).send({ message : err, status : 400 });
-            }
-            else{
-                console.log("User Logged Out ",data);
-                res.status(200).send({ message: 'User Logged Out', status : 200 });
-            }
-        });
+        next();
     }).catch((err)=>{
         console.log("Error ",err);
         res.status(400).send({ message: err, status : 400 });
@@ -137,16 +126,11 @@ module.exports.signUp = (req, res) => {
 
 }
 
-module.exports.deleteUser = (req, res) => {
+module.exports.deleteUser = (req, res, next) => {
 
     console.log("Delete User ",req.body);
     let searchEmail = { email : req.body.email };
     User.findOneAndUpdate(searchEmail, { 'status': 'inactive' }, { upsert : true }, (err, data) => {
-        if(err)
-            res.status(400).send({ message: err, status : 400 });
-        else{
-            console.log("Deleted User ",data);
-            res.status(200).json({ message: 'User Deleted', status : 200 });
-        }
+        next();
     });
 }

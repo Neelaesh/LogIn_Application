@@ -29,6 +29,7 @@ class SignUp extends React.Component {
 
     componentWillReceiveProps(nextProps){
         console.log("Sign Up Will Recieve Props ",nextProps);
+        console.log("Sign Up Props ",this.props);
     }
 
     goBack = () => {

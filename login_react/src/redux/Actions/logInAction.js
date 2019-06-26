@@ -1,16 +1,16 @@
 import axios from 'axios';
-import endPoint from '../../ServerEndPoints/serverEndPoints';
+import endPoints from '../../ServerEndPoints/serverEndPoints';
 
 export const types = {
     LOG_IN : 'LOG_IN'
 }
 
-// New User Log In
+// User Log In
 export function logIn(user, history){
     console.log("LogIn Action ",user);
     console.log("LogIn Action History ",history);
     return (dispatch, getState) => {
-        axios.post(endPoint.logInEndPoint, user).then((userDetails)=>{
+        axios.post(endPoints.logInEndPoint, user).then((userDetails)=>{
             console.log("LogIn Success ",userDetails.data);
             console.log("LogIn Get State ",getState());
             localStorage.setItem('token', userDetails.data.token);
