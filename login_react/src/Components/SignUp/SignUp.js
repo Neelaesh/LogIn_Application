@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import PasswordStrengthMeter from '../Password/PasswordStrengthMeter';
+import SignUpModal from '../Modal/SignUpModal';
 
 class SignUp extends React.Component {
 
@@ -28,8 +29,13 @@ class SignUp extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log("Sign Up Will Recieve Props ",nextProps);
-        console.log("Sign Up Props ",this.props);
+        console.log("Sign Up Will Recieve Props ",nextProps.newUser);
+        if(nextProps.newUser.message){
+            this.setState({
+                showModal : true,
+                modalMessage : nextProps.newUser.message
+            });
+        }
     }
 
     goBack = () => {
@@ -157,6 +163,14 @@ class SignUp extends React.Component {
         }
     }
 
+    handleClose = (show) => {
+        this.setState({
+            showModal : show
+        }, () => {
+            this.props.history.push('/');
+        });
+    }
+
     render(){
         return(
             <div>
@@ -230,6 +244,11 @@ class SignUp extends React.Component {
                         </Col>
                     </Row>
                 </Container>
+                {
+                    this.state.showModal && 
+                    <SignUpModal show={this.state.showModal} modalMessage={this.state.modalMessage}
+                    handleModalClose={this.handleClose}></SignUpModal>
+                }
             </div>
         )
     }

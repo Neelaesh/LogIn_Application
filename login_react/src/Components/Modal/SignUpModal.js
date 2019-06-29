@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Modal , Button } from 'react-bootstrap';
 
-class SignUpModel extends React.Component {
+class SignUpModal extends React.Component {
     
     handleClose = () => {
         let show = false;
@@ -19,7 +19,7 @@ class SignUpModel extends React.Component {
                 </Modal.Header>
                 <Modal.Body>{this.props.modalMessage}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+                    <Button variant="secondary" onClick={this.handleClose}>OK</Button>
                 </Modal.Footer>
             </Modal>
         )
@@ -27,10 +27,10 @@ class SignUpModel extends React.Component {
 
 }
 
-SignUpModel.propTypes = {
+SignUpModal.propTypes = {
     handleModalClose : PropTypes.func.isRequired,
     show : PropTypes.bool.isRequired,
     modalMessage : PropTypes.string.isRequired
 }
 
-export default withRouter(SignUpModel);
+export default withRouter(SignUpModal);

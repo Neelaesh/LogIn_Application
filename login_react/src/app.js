@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, browserHistory, Redirect } from 'react-router-dom';
+import { Route, Switch, browserHistory, Redirect } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import Login from './redux/Containers/logInContainer';
 import Home from './redux/Containers/deleteAccountContainer';

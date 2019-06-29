@@ -6,7 +6,7 @@ import SignUp from '../../Components/SignUp/SignUp';
 const mapStateToProps = (state) => {
     console.log("SignUp Container mapStateToProps ",state)
     return {
-        signUp : state.signUp
+        newUser : state.signUp
     }
 }
 
