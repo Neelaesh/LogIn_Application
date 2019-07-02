@@ -2,6 +2,10 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 const webpack = require('webpack');
 
+var config = {
+    iconPath: 'node_modules/react-icons'
+};
+
 module.exports = {
     entry : './src/index.js',
     output : {

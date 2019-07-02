@@ -7,6 +7,9 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import GoogleLoginComponent from '../GoogleLogin/GoogleLoginComponent';
+import FacebookLoginComponent from '../FacebookLogin/FacebookLoginComponent';
+
 class Login extends React.Component {
   
     constructor(props) {
@@ -84,9 +87,11 @@ class Login extends React.Component {
                   
                   <center>
                     <Button variant="primary" type="submit" disabled={this.state.showButton}>Log In</Button><br/><br/>
-                    <Button variant="outline-primary" type="submit">Google</Button>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="outline-primary" type="submit">FaceBook</Button><br/><br/>
+                    {/* <Button variant="outline-primary" type="submit">Google</Button> */}
+                    <GoogleLoginComponent/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<br/><br/>
+                    {/* <Button variant="outline-primary" type="submit">FaceBook</Button><br/><br/> */}
+                    <FacebookLoginComponent/><br/><br/>
                     <NavLink to="/signUp">Not Registered Yet?</NavLink>
                   </center>
                 </Form>
