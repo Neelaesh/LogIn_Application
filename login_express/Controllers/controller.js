@@ -218,5 +218,6 @@ module.exports.unlinkGoogle = (req,res) => {
 
 module.exports.unlinkFacebook = (req,res) => {
 
+    console.log("Unlink Facebook ",req.body);
     
 }
