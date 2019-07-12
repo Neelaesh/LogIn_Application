@@ -191,6 +191,7 @@ module.exports.googleLogin = (req,res) => {
 
 module.exports.facebookLogin = (req,res) => {
 
+    console.log("Facebook Login ",req.body);
 }
 
 module.exports.unlinkGoogle = (req,res) => {
