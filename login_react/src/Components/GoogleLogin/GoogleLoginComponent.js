@@ -25,15 +25,13 @@ class GoogleLoginComponent extends React.Component {
 
     googleLogin = (userObj) => {
         console.log("Google LogIn Success ",userObj);
-        /* let userAuth = {
-            user : userObj
-        }
-        console.log("userAuth ",userObj); */
         axios.post(endPoints.googleLoginEndPoint, userObj, { headers: { access_token : userObj.access_token } }).then(res => {
             console.log("Response ",res);
             console.log("Response Code",res.status);
-            localStorage.setItem('token', res.data.token);
-            this.props.history.push('/home');
+            if(res.data.token != undefined){
+                localStorage.setItem('token', res.data.token);
+                this.props.history.push('/home');
+            }
         }).catch(error => {
           console.log("Error ",error.message);
           if(error){
