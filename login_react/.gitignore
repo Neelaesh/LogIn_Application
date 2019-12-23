@@ -1,0 +1,3 @@
+node_modules/
+/src/ServerEndPoints/serverEndPoints.js
+/src/Configuration/config.js

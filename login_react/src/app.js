@@ -17,7 +17,7 @@ export default class App extends React.Component {
                 <div>
                     <NavBar history={browserHistory}></NavBar>
                     <Switch>
-                        <Route exact path="/" render={ () => <Login/> }/> 
+                        <Route exact path="/" render={ () => <Login history={browserHistory}/> }/> 
                         <Route path="/home" render={ () => (
                             localStorage.getItem('token') ? 
                                 //<Redirect to="/anyPath"/>
