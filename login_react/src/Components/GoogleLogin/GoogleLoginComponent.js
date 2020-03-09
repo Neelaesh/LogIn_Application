@@ -2,52 +2,37 @@ import React from 'react';
 import { withRouter } from "react-router-dom";
 import GoogleLogin from 'react-google-login';
 
-import axios from 'axios';
-import endPoints from '../../ServerEndPoints/serverEndPoints';
 import config from '../../Configuration/config';
 
 class GoogleLoginComponent extends React.Component {
 
-    responseGoogle = (response) => {
-        console.log("Google Login ",response);
-        console.log("Google Login Email ",response.profileObj.email);
-        console.log("Google Login GivenName ",response.profileObj.givenName);
-        console.log("Google Login FamilyName ",response.profileObj.familyName);
-        let userObj = { email : response.profileObj.email, username : response.profileObj.name, 
-        firstname : response.profileObj.givenName, lastname : "", access_token : response.accessToken };
-        if(response.profileObj.familyName!= undefined){
-            userObj.lastname = response.profileObj.familyName;
+    componentWillReceiveProps(newProps){
+        console.log("Google Login Component ",newProps);
+    }
+
+    googleLoginResponse = (googleResponse) => {
+        console.log("Google Login ",googleResponse);
+        let userObj = { email : googleResponse.profileObj.email, username : googleResponse.profileObj.name, 
+        firstname : googleResponse.profileObj.givenName, lastname : "", access_token : googleResponse.accessToken };
+        if(googleResponse.profileObj.familyName!= undefined){
+            userObj.lastname = googleResponse.profileObj.familyName;
         }
-        if(response.accessToken){
+        if(googleResponse.accessToken){
             this.googleLogin(userObj);
         }
     }
 
     googleLogin = (userObj) => {
-        console.log("Google LogIn Success ",userObj);
-        axios.post(endPoints.googleLoginEndPoint, userObj, { headers: { access_token : userObj.access_token } }).then(res => {
-            console.log("Response ",res);
-            console.log("Response Code",res.status);
-            if(res.data.token != undefined){
-                localStorage.setItem('token', res.data.token);
-                this.props.history.push('/home');
-            }
-        }).catch(error => {
-          console.log("Error ",error.message);
-          if(error){
-            let errorMessage = error.message;
-            let statusCode = errorMessage.substring(errorMessage.length-3, errorMessage.length);
-            console.log("statusCode ",statusCode);
-          }
-        })
+        console.log("Google LogIn ",userObj);
+        this.props.logIn(userObj, this.props.history);            
     }
 
     render(){
         return(
             <GoogleLogin clientId={config.googleClientID}
             buttonText="Login with Google"
-            onSuccess={this.responseGoogle}
-            onFailure={this.responseGoogle}
+            onSuccess={this.googleLoginResponse}
+            onFailure={this.googleLoginResponse}
             cookiePolicy={'single_host_origin'} ></GoogleLogin>
         )
     }

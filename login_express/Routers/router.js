@@ -3,9 +3,10 @@ const router = express.Router();
 const controller = require('../Controllers/controller');
 const verifyToken = require('../Authenticators/verifyJWTToken');
 const deleteToken = require('../Authenticators/deleteJWTToken');
+const { generateToken, sendToken } = require('../Authenticators/authLoginJWTToken');
 //const generateToken = require('../Authenticators/generateJWTToken');
 
-router.post('/logIn', controller.logIn, (req,res)=>{
+router.post('/logIn', generateToken, sendToken, controller.logIn, (req,res)=>{
     console.log("Found the User Details");
 });
 router.post('/logOut', verifyToken.verifyJWTToken, controller.logOut, deleteToken.deleteJWTToken);

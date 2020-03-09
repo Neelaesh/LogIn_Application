@@ -5,8 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
-import axios from 'axios';
-import endPoints from '../../ServerEndPoints/serverEndPoints';
+import * as logOutActions from '../../redux/Actions/logOutAction';
 
 class NavBar extends React.Component {
 
@@ -49,14 +48,7 @@ class NavBar extends React.Component {
         let loggedInUser = {
             email : this.props.user.email
         }
-        axios.post(endPoints.logOutEndPoint, loggedInUser, axiosConfig).then((response) => {
-            console.log("User Logged Out ",response);
-            localStorage.removeItem('token');
-            this.props.history.push('/');
-        }).catch((err) => {
-            console.log("Error ",err);
-        });
-        
+        this.props.logOut(loggedInUser, axiosConfig, this.props.history);
     }
 
     render(){
@@ -86,10 +78,17 @@ class NavBar extends React.Component {
 
 const mapStateToProps = (state) => {
 
-    console.log("NavBar mapStateToProps",state.logIn);
-    return {
-        user : state.logIn
+    console.log("NavBar mapStateToProps",state);
+    if(state.logIn.username != ""){
+        return {
+            user : state.logIn
+        }
+    }
+    if(state.googleLogIn.username != ""){
+        return {
+            user : state.googleLogIn
+        }
     }
 }
 
-export default connect(mapStateToProps)(withRouter(NavBar));
+export default connect(mapStateToProps, logOutActions)(withRouter(NavBar));

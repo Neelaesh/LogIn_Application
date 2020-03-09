@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux';
 
-import * as logInActions from '../Actions/logInAction';
-import Login from '../../Components/LogIn/Login';
+import * as googleLogInActions from '../Actions/googleLoginAction';
+import GoogleLoginComponent from '../../Components/GoogleLogin/GoogleLoginComponent';
 
 
 const mapStateToProps = (state) => {
@@ -16,4 +16,4 @@ const mapStateToProps = (state) => {
 //     logInActions
 // },dispatch);
 
-export default connect(mapStateToProps, logInActions)(Login);
+export default connect(mapStateToProps, googleLogInActions)(GoogleLoginComponent);

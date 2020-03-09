@@ -13,9 +13,8 @@ module.exports.logIn = (req,res,next) => {
         if(user.length != 0){  
             console.log("Password Matching ",bcrypt.compareSync(req.body.password, user[0].password));
             if(bcrypt.compareSync(req.body.password, user[0].password)){
-                let token = generateToken.generateJWTToken(user[0].email);
                 let searchEmail = { 'email' : req.body.email };
-                User.findOneAndUpdate(searchEmail, { 'token': token }, (err, data) => {
+                User.findOneAndUpdate(searchEmail, { 'token': req.body.token }, (err, data) => {
                     if(err)
                         res.status(400).send({ message: err, status : 400 });
                     else{
@@ -26,7 +25,7 @@ module.exports.logIn = (req,res,next) => {
                             userid : user[0].userid,
                             firstname : user[0].firstname,
                             lastname : user[0].lastname,
-                            token
+                            token : req.body.token
                         });
                         next();
                     }
@@ -139,11 +138,10 @@ module.exports.deleteUser = (req, res, next) => {
 module.exports.googleLogin = (req,res) => {
 
     console.log("Google Login User ",req.body);
-    let token = generateToken.generateJWTToken(req.body.email);
     User.find({ 'email' : req.body.email, 'status' : 'active' }).then((user)=>{
         if(user.length!=0){
             let userObj = {
-                'token': token,
+                'token': req.body.token,
                 googleAccountLinked : true,
             }  
             User.update({ 'email' : req.body.email }, userObj, (err, data) => {
@@ -153,13 +151,13 @@ module.exports.googleLogin = (req,res) => {
                 }
                 else{
                     console.log("Google LogIn User Updated ",data);
-                    res.status(200).json({
+                    return res.status(200).json({
                         email : req.body.email,
                         username : req.body.username,
                         firstname : req.body.firstname,
                         lastname : req.body.lastname,
                         googleAccountLinked : true,
-                        token,
+                        token : req.body.token,
                         message : "Google LogIn User Updated",
                         status : 200
                     });
@@ -173,18 +171,19 @@ module.exports.googleLogin = (req,res) => {
                 firstname : req.body.firstname,
                 lastname : req.body.lastname,
                 googleAccountLinked : true,
-                token
+                token : req.body.token
             });
             console.log("Google LogIn New User ",user);
             user.save((err) => {
                 if(err){
                     console.log("Error while Saving User ",err);
-                    res.status(400).send({ message:"Error while Creating User", status : 400 });
+                    return res.status(400).send({ message:"Error while Creating User", status : 400 });
                 }
                 else
-                    res.status(200).json({ message:"User Created Successfully", status : 200, ...user });
+                    return res.status(200).json({ message:"User Created Successfully", status : 200, ...req.body });
             });
         }
+        //return res.status(200).send(req.body);
     });
 
 }

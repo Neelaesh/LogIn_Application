@@ -15,9 +15,9 @@ module.exports = {
       req.token = createToken(req.body.email);
       return next();
   },
-  sendToken: function(req, res) {
+  sendToken: function(req, res, next) {
       console.log("Token ",req.token);
       req.body["token"] = req.token;
-      return res.status(200).send(req.body);
+      return next();
   }
 };

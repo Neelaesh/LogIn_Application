@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 
 const { generateToken, sendToken } = require('../Authenticators/authLoginJWTToken');
+const controller = require('../Controllers/controller');
 var config = require('./config.js');
 var request = require('request');
 
@@ -82,6 +83,6 @@ router.post('/googleLogin' , passport.authenticate('google-token', {session: fal
             return res.send(401, 'User Not Authenticated');
         }
         next();
-    }, generateToken, sendToken);
+    }, generateToken, sendToken, controller.googleLogin);
 
 module.exports = router;
