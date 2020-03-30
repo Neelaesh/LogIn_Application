@@ -1,12 +1,12 @@
 'use strict';
 
 //require('./mongoose')();
-var passport = require('passport');
+const passport = require('passport');
 //var TwitterTokenStrategy = require('passport-twitter-token');
 //var User = require('mongoose').model('User');
-//var FacebookTokenStrategy = require('passport-facebook-token');
-var GoogleTokenStrategy = require('passport-google-token').Strategy;
-var config = require('./Routers/config');
+const FacebookTokenStrategy = require('passport-facebook-token');
+const GoogleTokenStrategy = require('passport-google-token').Strategy;
+const config = require('./Routers/config');
 
 module.exports = function () {
 
@@ -19,17 +19,16 @@ module.exports = function () {
             User.upsertTwitterUser(token, tokenSecret, profile, function(err, user) {
                 return done(err, user);
             });
-        }));
+        }));*/
 
     passport.use(new FacebookTokenStrategy({
-            clientID: config.facebookAuth.clientID,
-            clientSecret: config.facebookAuth.clientSecret
+            clientID: config.facebookClientID,
+            clientSecret: config.facebookClientSecret
         },
         function (accessToken, refreshToken, profile, done) {
-            User.upsertFbUser(accessToken, refreshToken, profile, function(err, user) {
-                return done(err, user);
-            });
-        })); */
+            console.log(`Access Token ${accessToken} Profile ${JSON.stringify(profile)}`);
+            return done(null, JSON.stringify(profile));
+        }));
 
     passport.use(new GoogleTokenStrategy({
             clientID: config.googleClientID,

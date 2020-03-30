@@ -12,6 +12,8 @@ const authRouter = require('./Routers/authRouter');
 
 const app = express();
 
+require('./passport')();
+
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

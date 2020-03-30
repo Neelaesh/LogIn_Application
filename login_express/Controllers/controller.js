@@ -135,30 +135,33 @@ module.exports.deleteUser = (req, res, next) => {
     });
 }
 
-module.exports.googleLogin = (req,res) => {
-
-    console.log("Google Login User ",req.body);
+socialLogin = (req, res, googleLogin, facebookLogin) => {
+    console.log("Social Login ",req.body);
     User.find({ 'email' : req.body.email, 'status' : 'active' }).then((user)=>{
+        console.log("Found User ",user);
         if(user.length!=0){
             let userObj = {
-                'token': req.body.token,
-                googleAccountLinked : true,
-            }  
+                token : req.body.token,
+                googleAccountLinked : googleLogin,
+                facebookAccountLinked : facebookLogin
+            }
+            console.log("userObj ",userObj);
             User.update({ 'email' : req.body.email }, userObj, (err, data) => {
                 if(err){
                     console.log("Error ",err);
-                    res.status(400).send({ message: err, status : 400 });
+                    return res.status(400).send({ message:"Error during Logging In", status : 400 });
                 }
                 else{
-                    console.log("Google LogIn User Updated ",data);
+                    console.log("LogIn User Updated ",data);
                     return res.status(200).json({
                         email : req.body.email,
                         username : req.body.username,
                         firstname : req.body.firstname,
                         lastname : req.body.lastname,
-                        googleAccountLinked : true,
+                        googleAccountLinked : googleLogin,
+                        facebookAccountLinked : facebookLogin,
                         token : req.body.token,
-                        message : "Google LogIn User Updated",
+                        message : "User Logged In Successfully",
                         status : 200
                     });
                 }
@@ -170,27 +173,33 @@ module.exports.googleLogin = (req,res) => {
                 username : req.body.username,
                 firstname : req.body.firstname,
                 lastname : req.body.lastname,
-                googleAccountLinked : true,
-                token : req.body.token
+                token : req.body.token,
+                googleAccountLinked : googleLogin,
+                facebookAccountLinked : facebookLogin
             });
-            console.log("Google LogIn New User ",user);
+            console.log("LogIn New User ",user);
             user.save((err) => {
                 if(err){
-                    console.log("Error while Saving User ",err);
-                    return res.status(400).send({ message:"Error while Creating User", status : 400 });
+                    console.log("Error during Logging In ",err);
+                    return res.status(400).send({ message:"Error during Logging In", status : 400 });
                 }
                 else
-                    return res.status(200).json({ message:"User Created Successfully", status : 200, ...req.body });
+                    return res.status(200).json({ message:"User Logged In Successfully", status : 200, ...req.body });
             });
         }
-        //return res.status(200).send(req.body);
     });
-
 }
 
-module.exports.facebookLogin = (req,res) => {
+module.exports.googleLogin = (req, res) => {
 
-    console.log("Facebook Login ",req.body);
+    console.log("Google Login User ",req.body);
+    socialLogin(req, res, googleLogin = true, facebookLogin = false);
+}
+
+module.exports.facebookLogin = (req, res) => {
+
+    console.log("Facebook Login User ",req.body);
+    socialLogin(req, res, googleLogin = false, facebookLogin = true);
 }
 
 module.exports.unlinkGoogle = (req,res) => {

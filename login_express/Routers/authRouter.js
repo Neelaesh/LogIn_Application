@@ -4,11 +4,11 @@ const passport = require('passport');
 
 const { generateToken, sendToken } = require('../Authenticators/authLoginJWTToken');
 const controller = require('../Controllers/controller');
-var config = require('./config.js');
-var request = require('request');
 
 require('../passport')();
 
+router.use(passport.initialize());
+router.use(passport.session());
 //const generateToken = require('../Authenticators/generateJWTToken');
 
 /* router.route('/auth/twitter/reverse')
@@ -64,8 +64,9 @@ router.route('/auth/twitter')
         return next();
     }, generateToken, sendToken); */
 
-/* router.route('/auth/facebook')
-    .post(passport.authenticate('facebook-token', {session: false}), function(req, res, next) {
+router.post('/facebookLogin', passport.authenticate('facebook-token', {session: false
+}), function(req, res, next) {
+    console.log("Facebook Req ",req.body);
         if (!req.user) {
             return res.send(401, 'User Not Authenticated');
         }
@@ -74,7 +75,7 @@ router.route('/auth/twitter')
         };
 
         next();
-    }, generateToken, sendToken); */
+    }, generateToken, sendToken, controller.facebookLogin);
 
 router.post('/googleLogin' , passport.authenticate('google-token', {session: false
 }), function(req, res, next) {
