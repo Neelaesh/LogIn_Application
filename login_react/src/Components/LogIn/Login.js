@@ -85,14 +85,14 @@ class Login extends React.Component {
                   </Form.Group>
                   
                   <center>
-                    <Button variant="primary" type="submit" disabled={this.state.showButton}>Log In</Button><br/><br/>
-                    {/* <Button variant="outline-primary" type="submit">Google</Button> */}
-                    <GoogleLogin/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<br/><br/>
-                    {/* <Button variant="outline-primary" type="submit">FaceBook</Button><br/><br/> */}
+                    <Button variant="primary" type="submit" className="btn-login" disabled={this.state.showButton}>Log In</Button><br/><br/>
+                    </center>
+                    <GoogleLogin />
+                    &nbsp;&nbsp;&nbsp;<br/>
                     <FacebookLogin/><br/><br/>
-                    <NavLink to="/signUp">Not Registered Yet?</NavLink>
-                  </center>
+                    <center>
+                      <NavLink to="/signUp">Not Registered Yet?</NavLink>
+                    </center>
                 </Form>
             </Col>
           </Row>

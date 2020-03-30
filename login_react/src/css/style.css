@@ -46,13 +46,21 @@
   background-color: #70C1B3;
 }
 
-.googleLogin {
-  margin:5px;
-  width: 165px;
-  height:35px;
-  border-radius: 4px;
-  background: #db3236;
-  color:white;
-  border:0px transparent;
-  text-align: center;
+.btn-login {
+  padding-left    : 150px;
+  padding-right   : 150px;
+  padding-top     : 6px;
+  padding-bottom  : 8px;
+}
+
+.btn-facebook {
+  padding-left    : 84px;
+  padding-right   : 92px;
+  padding-top     : 6px;
+  padding-bottom  : 8px;
+  border-color    : #3B5998;
+  background-color: #3B5998;
+  color           : white;
+  font-size       : 16px;
+  border-radius   : 6px;
 }

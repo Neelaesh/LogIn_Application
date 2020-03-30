@@ -18,14 +18,25 @@ class FacebookLoginComponent extends React.Component {
     }
 
     render(){
-
+        var customGoogleButtonStyle = {
+            'color': 'blue',
+            'padding-left' : '88px',
+            'padding-right'  : '94px',
+            'border-color': 'beige',
+            'background-color': 'beige',
+            'font-size': '16px',
+            'border-radius': '6px'
+        };
         return(
             <FacebookLogin 
             appId="396310434330822"
-            autoLoad={false}
-            fields="name,email,picture"
             callback={this.responseFacebook}
+            render={renderProps => (
+                <button onClick={renderProps.onClick} style={customGoogleButtonStyle}>Facebook</button>
+            )}
+            cssClass="btn-facebook"
             icon="fa-facebook"
+            textButton="        Sign in with Facebook"
             ></FacebookLogin>
             )
     }
