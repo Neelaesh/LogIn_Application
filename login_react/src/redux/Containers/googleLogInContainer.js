@@ -6,7 +6,6 @@ import GoogleLoginComponent from '../../Components/GoogleLogin/GoogleLoginCompon
 
 
 const mapStateToProps = (state) => {
-    console.log("Login Container mapStateToProps-------------- ",state)
     return {
         user: state.logIn
     }

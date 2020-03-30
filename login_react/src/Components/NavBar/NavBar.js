@@ -79,14 +79,19 @@ class NavBar extends React.Component {
 const mapStateToProps = (state) => {
 
     console.log("NavBar mapStateToProps",state);
-    if(state.logIn.username != ""){
+    if(state.logIn && state.logIn.username != ""){
         return {
             user : state.logIn
         }
     }
-    if(state.googleLogIn.username != ""){
+    if(state.googleLogIn && state.googleLogIn.username != ""){
         return {
             user : state.googleLogIn
+        }
+    }
+    if(state.facebookLogIn && state.facebookLogIn.username != ""){
+        return {
+            user : state.facebookLogIn
         }
     }
 }

@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import GoogleLogin from '../../redux/Containers/googleLogInContainer';
-import FacebookLoginComponent from '../FacebookLogin/FacebookLoginComponent';
+import FacebookLogin from '../../redux/Containers/facebookLoginContainer';
 
 class Login extends React.Component {
   
@@ -20,7 +20,6 @@ class Login extends React.Component {
       showButton : true
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log("componentWillMount ",this.props);
   }
 
   componentWillReceiveProps(){
@@ -91,7 +90,7 @@ class Login extends React.Component {
                     <GoogleLogin/>
                     &nbsp;&nbsp;&nbsp;&nbsp;<br/><br/>
                     {/* <Button variant="outline-primary" type="submit">FaceBook</Button><br/><br/> */}
-                    <FacebookLoginComponent/><br/><br/>
+                    <FacebookLogin/><br/><br/>
                     <NavLink to="/signUp">Not Registered Yet?</NavLink>
                   </center>
                 </Form>

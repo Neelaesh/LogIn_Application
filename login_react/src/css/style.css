@@ -45,3 +45,14 @@
 .strength-Strong::-webkit-progress-value {
   background-color: #70C1B3;
 }
+
+.googleLogin {
+  margin:5px;
+  width: 165px;
+  height:35px;
+  border-radius: 4px;
+  background: #db3236;
+  color:white;
+  border:0px transparent;
+  text-align: center;
+}

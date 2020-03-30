@@ -1,6 +1,7 @@
 import logIn from '../Reducers/logInReducer';
 import signUp from '../Reducers/signUpReducer';
 import googleLogIn from '../Reducers/googleLogInReducer';
+import facebookLogIn from '../Reducers/facebookLoginReducer';
 import logOut from '../Reducers/logOutReducer';
 
 import { combineReducers } from 'redux';
@@ -9,6 +10,7 @@ const appReducer = combineReducers({
     logIn, 
     signUp,
     googleLogIn,
+    facebookLogIn,
     logOut
 });
 

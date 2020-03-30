@@ -15,7 +15,7 @@ export function logIn(userObj, history){
                 console.log("Google LogIn Get State ",getState());
                 console.log("Response ",response);
                 console.log("Response Code",response.status);
-                if(response.data.token != undefined){
+                if(response.data.token != undefined || response.data.token != ''){
                     localStorage.setItem('token', response.data.token);
                     dispatch(userGoogleLogin(response.data));
                     history.push('/home');

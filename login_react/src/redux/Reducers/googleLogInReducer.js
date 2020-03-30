@@ -1,4 +1,10 @@
 const initialState = {
+    username : '',
+    email : '',
+    firstname : '',
+    lastname : '',
+    googleAccountLinked : false,
+    facebookAccountLinked :false
 }
 
 export default function logIn(state = initialState, action){
