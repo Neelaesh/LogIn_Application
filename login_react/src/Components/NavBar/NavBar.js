@@ -94,6 +94,10 @@ const mapStateToProps = (state) => {
             user : state.facebookLogIn
         }
     }
+    // Returning Empty Object by Default
+    return {
+
+    }
 }
 
 export default connect(mapStateToProps, logOutActions)(withRouter(NavBar));
