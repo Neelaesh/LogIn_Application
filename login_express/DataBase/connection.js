@@ -4,6 +4,9 @@ const config = require('../Configurations/config');
 // Getting MongoDB Url
 const mongoDB = config.mongourl;
 
+// To accept deprecated methods such as findOneAndUpdate
+mongoose.set('useFindAndModify', false);
+
 // Connecting to MongoDB using Mongoose
 mongoose.connect(mongoDB, { useNewUrlParser : true });
 

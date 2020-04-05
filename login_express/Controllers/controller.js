@@ -25,7 +25,9 @@ module.exports.logIn = (req,res,next) => {
                             userid : user[0].userid,
                             firstname : user[0].firstname,
                             lastname : user[0].lastname,
-                            token : req.body.token
+                            token : req.body.token,
+                            googleAccountLinked : user[0].googleAccountLinked,
+                            facebookAccountLinked : user[0].facebookAccountLinked
                         });
                         next();
                     }
@@ -131,6 +133,7 @@ module.exports.deleteUser = (req, res, next) => {
     console.log("Delete User ",req.body);
     let searchEmail = { email : req.body.email };
     User.findOneAndUpdate(searchEmail, { 'status': 'inactive' }, { upsert : true }, (err, data) => {
+        console.log("Deleted User ",data);
         next();
     });
 }
@@ -202,31 +205,45 @@ module.exports.facebookLogin = (req, res) => {
     socialLogin(req, res, googleLogin = false, facebookLogin = true);
 }
 
-module.exports.unlinkGoogle = (req,res) => {
-    
-    console.log("Unlink Google ",req.body);
+unLink = (req, res, google, facebook) => {
     User.find({ 'email' : req.body.email, 'status' : 'active' }).then((user)=>{
         console.log("Google LogIn User ",user);
         if(user.length!=0){
-            User.findOneAndUpdate(req.body.email, { 'googleAccountLinked': false }, (err, data) => {
+            if(google){
+                let unLink = { 
+                    googleAccountLinked : false 
+                }
+            }
+            if(facebook){
+                let unLink = { 
+                    facebookAccountLinked : false 
+                }
+            }
+            User.findOneAndUpdate({ 'email' : req.body.email }, unLink, (err, data) => {
                 if(err){
                     console.log("Error ",err);
                     res.status(400).send({ message: err, status : 400 });
                 }
                 else{
                     console.log("User Updated Successfully ",data);
-                    res.status(200).json({ message: "Google Account Unlinked Successfully", status : 200 });
+                    res.status(200).json({ message: "UnLink Successfull", status : 200 });
                 }
             });
         }
         else{
-            res.status(400).send({ message:"No Google Account Found to Unlink", status : 400 });
+            res.status(400).send({ message:"No User Found to UnLink", status : 400 });
         }
     });
+}
+
+module.exports.unlinkGoogle = (req,res) => {
+    
+    console.log("Unlink Google ",req.body);
+    unLink(req, res, google = true, facebook = false);
 }
 
 module.exports.unlinkFacebook = (req,res) => {
 
     console.log("Unlink Facebook ",req.body);
-    
+    unLink(req, res, google = false, facebook = true);
 }

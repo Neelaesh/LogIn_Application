@@ -12,11 +12,11 @@ router.post('/logIn', generateToken, sendToken, controller.logIn, (req,res)=>{
 router.post('/logOut', verifyToken.verifyJWTToken, controller.logOut, deleteToken.deleteJWTToken);
 router.get('/', controller.getUsers);
 router.post('/signUp', controller.signUp);
-router.post('/deleteAccount', controller.deleteUser, deleteToken.deleteJWTToken);
+router.post('/delete', controller.deleteUser, deleteToken.deleteJWTToken);
 router.post('/googleLogin', controller.googleLogin);
 router.post('/facebookLogin', controller.facebookLogin);
-router.post('/unlinkGoogle', controller.unlinkGoogle);
-router.post('/unlinkFacebook', controller.unlinkFacebook);
+router.post('/unLinkGoogle', controller.unlinkGoogle);
+router.post('/unLinkFacebook', controller.unlinkFacebook);
 
 
 module.exports = router;
