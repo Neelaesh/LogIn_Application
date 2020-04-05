@@ -206,20 +206,24 @@ module.exports.facebookLogin = (req, res) => {
 }
 
 unLink = (req, res, google, facebook) => {
+    console.log("Unlink ",req.body);
     User.find({ 'email' : req.body.email, 'status' : 'active' }).then((user)=>{
         console.log("Google LogIn User ",user);
         if(user.length!=0){
+            let unLinkObj = {};
             if(google){
-                let unLink = { 
+                console.log("Google ",google);
+                unLinkObj = { 
                     googleAccountLinked : false 
                 }
             }
             if(facebook){
-                let unLink = { 
+                console.log("Facebook ",facebook);
+                unLinkObj = { 
                     facebookAccountLinked : false 
                 }
             }
-            User.findOneAndUpdate({ 'email' : req.body.email }, unLink, (err, data) => {
+            User.findOneAndUpdate({ 'email' : req.body.email }, unLinkObj, (err, data) => {
                 if(err){
                     console.log("Error ",err);
                     res.status(400).send({ message: err, status : 400 });
@@ -236,14 +240,10 @@ unLink = (req, res, google, facebook) => {
     });
 }
 
-module.exports.unlinkGoogle = (req,res) => {
-    
-    console.log("Unlink Google ",req.body);
+module.exports.unLinkGoogle = (req,res) => {
     unLink(req, res, google = true, facebook = false);
 }
 
-module.exports.unlinkFacebook = (req,res) => {
-
-    console.log("Unlink Facebook ",req.body);
+module.exports.unLinkFacebook = (req,res) => {
     unLink(req, res, google = false, facebook = true);
 }

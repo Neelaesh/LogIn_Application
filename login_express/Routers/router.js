@@ -15,8 +15,8 @@ router.post('/signUp', controller.signUp);
 router.post('/delete', controller.deleteUser, deleteToken.deleteJWTToken);
 router.post('/googleLogin', controller.googleLogin);
 router.post('/facebookLogin', controller.facebookLogin);
-router.post('/unLinkGoogle', controller.unlinkGoogle);
-router.post('/unLinkFacebook', controller.unlinkFacebook);
+router.post('/unLinkGoogle', controller.unLinkGoogle);
+router.post('/unLinkFacebook', controller.unLinkFacebook);
 
 
 module.exports = router;
