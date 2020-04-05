@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, browserHistory, Redirect } from 'react-router-dom';
 import NavBar from './Components/NavBar/NavBar';
 import Login from './redux/Containers/logInContainer';
-import Home from './redux/Containers/deleteAccountContainer';
+import Home from './redux/Containers/deleteUserContainer';
 import Error from './Components/Error/Error';
 import SignUp from './redux/Containers/SignUpContainer';
 

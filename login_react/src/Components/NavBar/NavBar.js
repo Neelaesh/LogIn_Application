@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 
 import * as logOutActions from '../../redux/Actions/logOutAction';
 
@@ -61,6 +62,8 @@ class NavBar extends React.Component {
                 <Navbar.Collapse className="justify-content-end">
                 { this.state.showUser ?  
                     <div>
+                        {/* <Image src="src/Components/NavBar/download.png" rounded /> */}
+                        {/* <img src={require('./src/Components/NavBar/download.png')} /> */}
                         <Navbar.Text bg="primary" variant="dark">
                         Signed in as: { this.props.user.firstname + " " + this.props.user.lastname }
                         </Navbar.Text>

@@ -3,6 +3,7 @@ import signUp from '../Reducers/signUpReducer';
 import googleLogIn from '../Reducers/googleLogInReducer';
 import facebookLogIn from '../Reducers/facebookLoginReducer';
 import logOut from '../Reducers/logOutReducer';
+import deleteUser from '../Reducers/deleteUserReducer';
 
 import { combineReducers } from 'redux';
 
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     signUp,
     googleLogIn,
     facebookLogIn,
-    logOut
+    logOut,
+    deleteUser
 });
 
 const rootReducer = (state, action) => {

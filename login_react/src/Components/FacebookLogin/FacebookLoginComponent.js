@@ -24,6 +24,7 @@ class FacebookLoginComponent extends React.Component {
             callback={this.responseFacebook}
             cssClass="btn-facebook"
             icon="fa-facebook"
+            fields="name,email,picture"
             textButton="        Sign in with Facebook"
             ></FacebookLogin>
             )

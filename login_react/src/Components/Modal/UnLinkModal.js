@@ -4,29 +4,28 @@ import PropTypes from 'prop-types';
 
 import { Modal , Button } from 'react-bootstrap';
 
-class DeleteAccountModal extends React.Component {
+class UnLinkGoogleModal extends React.Component {
     
     handleClose = () => {
         let show = false;
         this.props.handleModalClose(show);
     }
 
-    deleteAccount = () => {
-        console.log("Delete Account ");
-        let deleteStatus = true;
+    unLink = () => {
+        let unLinkStatus = true;
         let show = false;
-        this.props.handleModalClose(show, deleteStatus);
+        this.props.handleModalClose(show, unLinkStatus);
     }
 
     render(){
         return(
             <Modal show={this.props.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete Account</Modal.Title>
+                    <Modal.Title>{this.props.modalTitle}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{this.props.modalMessage}</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.deleteAccount}>Yes</Button>
+                    <Button variant="secondary" onClick={this.unLink}>Yes</Button>
                     <Button variant="secondary" onClick={this.handleClose}>No</Button>
                 </Modal.Footer>
             </Modal>
@@ -35,10 +34,11 @@ class DeleteAccountModal extends React.Component {
 
 }
 
-DeleteAccountModal.propTypes = {
+UnLinkGoogleModal.propTypes = {
     handleModalClose : PropTypes.func.isRequired,
     show : PropTypes.bool.isRequired,
+    modalTitle : PropTypes.string.isRequired,
     modalMessage : PropTypes.string.isRequired
 }
 
-export default withRouter(DeleteAccountModal);
+export default withRouter(UnLinkGoogleModal);

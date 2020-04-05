@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
 import Home from '../../Components/Home/Home';
-import * as deleteActions from '../../redux/Actions/deleteAccountAction';
+import * as deleteActions from '../../redux/Actions/deleteUserAction';
 
 const mapStateToProps = (state) => {
-    console.log("Home mapStateToProps",state.logIn);
+    console.log("Delete User mapStateToProps",state.logIn);
     return {
         user : state.logIn
     }
