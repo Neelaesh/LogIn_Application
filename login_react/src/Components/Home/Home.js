@@ -14,13 +14,6 @@ class Home extends React.Component {
 
     constructor(){
         super();
-        if (window.performance) {
-            if (performance.navigation.type == 1) {
-              alert( "This page is reloaded" );
-            } else {
-              alert( "This page is not reloaded");
-            }
-        }
         this.state = {
             showDeleteModal : false,
             deleteModalMessage : null,
@@ -168,7 +161,7 @@ class Home extends React.Component {
                         handleModalClose={this.unLinkGoogleModalClose}></UnLinkModal>
                     }
                     {   
-                        this.props.user.facebookAccountLinked ? 
+                        this.state.facebookAccountLinked ? 
                         <div>
                             <Button variant="outline-info" onClick={this.unLinkFacebook}>Un Link FaceBook Account</Button><br/><br/>
                         </div>
